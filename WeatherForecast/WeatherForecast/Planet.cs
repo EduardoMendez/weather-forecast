@@ -30,11 +30,13 @@ namespace WeatherForecast
         {
             var angleInDegrees = (day * AngularSpeedInDegrees) % degreeCircumference;
 
+            // If the planet rotates counterclockwise, I must calculate 360 - angle.
             if (RotationDirection == Direction.CLOCKWISE && angleInDegrees > 0)
                 angleInDegrees = degreeCircumference - angleInDegrees;
 
             var angleInRadians = angleInDegrees.ToRadians();
 
+            // It goes from polar coordinates to rectangular coordinates.
             var x = OrbitRadiusInKm * Math.Cos(angleInRadians);
             var y = OrbitRadiusInKm * Math.Sin(angleInRadians);
 
