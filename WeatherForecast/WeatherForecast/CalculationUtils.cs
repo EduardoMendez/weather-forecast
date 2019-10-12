@@ -8,9 +8,21 @@ namespace WeatherForecast
     {
         public static bool AreCollinear(Point point1, Point point2, Point point3)
         {
-            return ((point3.Y - point2.Y) * (point2.X - point1.X) ==
-                (point2.Y - point1.Y) * (point3.X - point2.X));
+            /*
+            Three points lie on the straight line if the area formed by the triangle of these three points is zero.
+            
+            Formula for area of triangle is : 
+                0.5 * [x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)]
+            */
+
+            /* We can skipped multiplication with 0.5 because we only want to know if it is equals to zero */
+            var a = point1.X * (point2.Y - point3.Y) +
+                    point2.X * (point3.Y - point1.Y) +
+                    point3.X * (point1.Y - point2.Y);
+
+            return a == 0;
         }
+
 
         public static bool AreCollinear(Point point1, Point point2, Point point3, Point point4)
         {
