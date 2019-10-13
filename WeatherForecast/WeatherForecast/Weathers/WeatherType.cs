@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WeatherForecast
+namespace WeatherForecast.Weathers
 {
 
     public abstract class WeatherType

@@ -4,6 +4,7 @@ using System.Text;
 using WeatherForecast;
 using static WeatherForecast.WeatherForecaster;
 using System.Linq;
+using WeatherForecast.Weathers;
 
 namespace WeatherForecast
 {
@@ -14,15 +15,15 @@ namespace WeatherForecast
         public MeteorologicalDay PeakDay { get; set; }
         public WeatherType Weather { get; set; }
 
-        public WeatherPeriod(WeatherType weatherType, IList<MeteorologicalDay> days)
+        public WeatherPeriod(WeatherType weatherType, IList<MeteorologicalDay> periodDays)
         {
             Weather = weatherType;
 
-            StartDay = days.OrderBy(d => d.Day).First().Day;
-            EndDay = days.OrderByDescending(d => d.Day).First().Day;
+            StartDay = periodDays.OrderBy(d => d.Day).First().Day;
+            EndDay = periodDays.OrderByDescending(d => d.Day).First().Day;
 
             if (MustCalculatePeakDay())
-                PeakDay = this.GetPeakDay(days);
+                PeakDay = this.GetPeakDay(periodDays);
         }
 
         private bool MustCalculatePeakDay()

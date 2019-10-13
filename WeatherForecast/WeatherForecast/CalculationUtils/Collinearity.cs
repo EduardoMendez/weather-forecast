@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WeatherForecast
 {
-    public class CalculationUtils
+    public class Collinearity
     {
         public static bool AreCollinear(Point point1, Point point2, Point point3)
         {

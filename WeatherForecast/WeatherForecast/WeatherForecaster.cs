@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WeatherForecast.Weathers;
 
 namespace WeatherForecast
 {
@@ -38,12 +39,12 @@ namespace WeatherForecast
             var points = new List<Point>(planetsPositions);
             points.Add(sun);
 
-            return CalculationUtils.AreCollinear(points);
+            return Collinearity.AreCollinear(points);
         }
 
         public bool PlanetsAligned(IEnumerable<Point> planetsPositions)
         {
-            return CalculationUtils.AreCollinear(planetsPositions);
+            return Collinearity.AreCollinear(planetsPositions);
         }
     }
 }

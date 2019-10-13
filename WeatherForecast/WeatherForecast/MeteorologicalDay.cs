@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WeatherForecast.Weathers;
 
 namespace WeatherForecast
 {
@@ -8,7 +9,7 @@ namespace WeatherForecast
     {
         public int Day { get; set; }
         public WeatherType Weather { get; }
-        public Point Sun;
+        public Point Sun { get; }
         public IEnumerable<Point> PlanetsPositions { get; set; }
 
         public MeteorologicalDay() { }

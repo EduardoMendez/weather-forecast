@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WeatherForecast
+namespace WeatherForecast.Weathers
 {
     public class Drought : WeatherType
     {
-        public override string Description { get => "Sequía"; }
+        public override string Description { get => "Sequia"; }
 
         public Drought() { }
 

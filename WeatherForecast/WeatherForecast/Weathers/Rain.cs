@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace WeatherForecast
+namespace WeatherForecast.Weathers
 {
     class Rain : WeatherType
     {

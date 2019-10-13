@@ -16,7 +16,7 @@ namespace WeatherForecastTests
             var pointB = new Point(2, 0);
             var pointC = new Point(3, 0);
 
-            Assert.IsTrue(CalculationUtils.AreCollinear(pointA, pointB, pointC));
+            Assert.IsTrue(Collinearity.AreCollinear(pointA, pointB, pointC));
         }
 
         [Test]
@@ -27,7 +27,7 @@ namespace WeatherForecastTests
             var pointB = new Point(3, 18);
             var pointC = new Point(8, 43);
 
-            Assert.IsTrue(CalculationUtils.AreCollinear(pointA, pointB, pointC));
+            Assert.IsTrue(Collinearity.AreCollinear(pointA, pointB, pointC));
         }
 
         [Test]
@@ -37,7 +37,7 @@ namespace WeatherForecastTests
             var pointB = new Point(5, 0);
             var pointC = new Point(3, 5);
 
-            Assert.IsFalse(CalculationUtils.AreCollinear(pointA, pointB, pointC));
+            Assert.IsFalse(Collinearity.AreCollinear(pointA, pointB, pointC));
         }
 
         [Test]
@@ -53,7 +53,7 @@ namespace WeatherForecastTests
                 new Point(12,25)
             };
 
-            Assert.IsTrue(CalculationUtils.AreCollinear(points));
+            Assert.IsTrue(Collinearity.AreCollinear(points));
         }
 
         [Test]
@@ -71,7 +71,7 @@ namespace WeatherForecastTests
                 new Point(10,10)
             };
 
-            Assert.IsFalse(CalculationUtils.AreCollinear(points));
+            Assert.IsFalse(Collinearity.AreCollinear(points));
         }
     }
 }
