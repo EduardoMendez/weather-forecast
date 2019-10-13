@@ -7,14 +7,6 @@ namespace WeatherForecast
 {
     public class WeatherForecaster
     {
-        public enum Weather
-        {
-            DROUGHT,
-            RAIN,
-            OPTIMAL,
-            UNKNOWN
-        }
-
         public IEnumerable<Planet> Planets { get; set; }
         public Point Sun { get; set; }
 
@@ -24,21 +16,21 @@ namespace WeatherForecast
             Sun = sun;
         }
 
-        public Weather WeatherForDay(int day)
+        public DayWeather WeatherForDay(int day)
         {
             var planetsPositions = Planets.Select(p => p.GetPositionForDay(day));
 
             if (PlanetsAndSunAligned(planetsPositions, Sun))
-                return Weather.DROUGHT;
+                return new DroughtDay(day);
 
             // Planets aligned but not aligned with the sun.
             if (PlanetsAligned(planetsPositions))
-                return Weather.OPTIMAL;
+                return new OptimalDay(day);
 
             if (new Triangle(planetsPositions).Contains(Sun))
-                return Weather.RAIN;
+                return new RainyDay(day, planetsPositions);
 
-            return Weather.UNKNOWN;
+            return new UnknownDay(day);
         }
 
         public bool PlanetsAndSunAligned(IEnumerable<Point> planetsPositions, Point sun)
