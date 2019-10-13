@@ -18,6 +18,8 @@ namespace WeatherForecast
 
         private const int degreeCircumference = 360;
 
+        public Planet() { }
+
         public Planet(string name, double angularSpeedInDegrees, Direction rotationDirection, int orbitRadiusInKm)
         {
             Name = name;

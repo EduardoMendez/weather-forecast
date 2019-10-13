@@ -39,5 +39,39 @@ namespace WeatherForecastTests
 
             Assert.IsFalse(CalculationUtils.AreCollinear(pointA, pointB, pointC));
         }
+
+        [Test]
+        public void FivePointsOfLineAreCollinear()
+        {
+            var points = new List<Point>
+            {
+                // Points of line y = 2x + 1
+                new Point(0,1),
+                new Point(2,5),
+                new Point(4,9),
+                new Point(7,15),
+                new Point(12,25)
+            };
+
+            Assert.IsTrue(CalculationUtils.AreCollinear(points));
+        }
+
+        [Test]
+        public void FivePointsNonAlignedAreNotCollinear()
+        {
+            var points = new List<Point>
+            {
+                // Points of line y = 2x + 1
+                new Point(0,1),
+                new Point(2,5),
+                // Points of line y = 3x + 5
+                new Point(4,17),
+                new Point(5,20),
+                // Another point
+                new Point(10,10)
+            };
+
+            Assert.IsFalse(CalculationUtils.AreCollinear(points));
+        }
     }
 }

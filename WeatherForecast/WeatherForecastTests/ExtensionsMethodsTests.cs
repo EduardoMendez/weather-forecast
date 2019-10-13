@@ -16,5 +16,14 @@ namespace WeatherForecastTests
 
             Assert.That(angleInRadians, Is.EqualTo(0.5 * Math.PI));
         }
+
+        [Test]
+        public void IsBetweenTest()
+        {
+            double number = 50;
+
+            Assert.IsTrue(number.IsBetween(0, 100));
+            Assert.IsFalse(number.IsBetween(60, 80));
+        }
     }
 }
