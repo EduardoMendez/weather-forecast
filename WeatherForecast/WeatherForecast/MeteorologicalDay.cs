@@ -23,7 +23,7 @@ namespace WeatherForecast
 
         public bool HasTheSameWeather(MeteorologicalDay day)
         {
-            return this.Weather.GetType() == day.Weather.GetType();
+            return this.Weather.IsTheSameWeatherType(day.Weather);
         }
 
         public double CalculatePrecipitations()

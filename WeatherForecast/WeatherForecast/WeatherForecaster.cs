@@ -34,6 +34,36 @@ namespace WeatherForecast
             return new MeteorologicalDay(day, new UnknownWeather(), planetsPositions);
         }
 
+        public IEnumerable<WeatherPeriod> GetWeatherPeriodsForecastForYears(int years)
+        {
+            var weatherPeriods = new List<WeatherPeriod>();
+            var periodDays = new List<MeteorologicalDay>();
+
+            var day = this.WeatherForDay(0);
+            var currentWeather = day.Weather;
+            periodDays.Add(day);
+
+            for (int i = 1; i < (360 * years); i++)
+            {
+                day = this.WeatherForDay(i);
+
+                if (!day.Weather.IsTheSameWeatherType(currentWeather))
+                {
+                    weatherPeriods.Add(new WeatherPeriod(currentWeather, periodDays));
+                    periodDays.Clear();
+
+                    currentWeather = day.Weather;
+                }
+
+                periodDays.Add(day);
+            }
+
+            // We add the last period.
+            weatherPeriods.Add(new WeatherPeriod(day.Weather, periodDays));
+
+            return weatherPeriods;
+        }
+
         public bool PlanetsAndSunAligned(IEnumerable<Point> planetsPositions, Point sun)
         {
             var points = new List<Point>(planetsPositions);

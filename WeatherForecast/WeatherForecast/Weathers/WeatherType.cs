@@ -16,6 +16,11 @@ namespace WeatherForecast.Weathers
             return 0;
         }
 
+        public bool IsTheSameWeatherType(WeatherType weather)
+        {
+            return this.GetType() == weather.GetType();
+        }
+
         public virtual bool IsRain()
         {
             return false;
