@@ -12,7 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using WeatherForecastAPI.Models;
-using WeatherForecastAPI.Context;
+using WeatherForecastAPI.DAO;
 
 namespace WeatherForecastAPI
 {
@@ -30,7 +30,7 @@ namespace WeatherForecastAPI
         {
             string connString = Configuration.GetConnectionString("DBConnectionString");
             services.AddDbContext<WeatherDbContext>(opt => opt.UseSqlServer(connString));
-            services.AddTransient(typeof(DAO.DayWeatherDAO));
+            services.AddTransient(typeof(DayWeatherDAO));
             services.AddControllers();
         }
 

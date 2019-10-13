@@ -8,8 +8,6 @@ namespace WeatherForecast.Weathers
     {
         public override string Description { get => "Lluvia"; }
 
-        private readonly double precipitationLevel;
-
         public Rain() { }
 
         public override bool IsRain()

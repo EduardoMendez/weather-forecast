@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using WeatherForecastAPI.Models;
 
-namespace WeatherForecastAPI.Context
+namespace WeatherForecastAPI.DAO
 {
     public class WeatherDbContext : DbContext
     {
@@ -13,6 +13,6 @@ namespace WeatherForecastAPI.Context
         {
         }
 
-        public DbSet<DayWeather> Days { get; set; }
+        public DbSet<DayWeather> DayWeathers { get; set; }
     }
 }

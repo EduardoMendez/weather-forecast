@@ -35,18 +35,9 @@ namespace WeatherForecastAPI.Migrations
 
         private void InitializeData(MigrationBuilder migrationBuilder)
         {
-            var ferengi = new Planet("ferengi", 1, Direction.CLOCKWISE, 500);
-            var vulcano = new Planet("vulcano", 5, Direction.COUNTERCLOCKWISE, 1000);
-            var betasoide = new Planet("betasoide", 3, Direction.CLOCKWISE, 2000);
+            var galaxy = Galaxy.GetVulcanosFerengisBetasoidesGalaxy();
 
-            var planets = new List<Planet>()
-            {
-                ferengi, vulcano, betasoide
-            };
-
-            var sun = new Point(0, 0);
-
-            var days = new WeatherForecaster(planets, sun).GetDayWeatherForecastForYears(10);
+            var days = new WeatherForecaster(galaxy.Planets, galaxy.Sun).GetDayWeatherForecastForYears(10);
 
             foreach(var d in days)
             {

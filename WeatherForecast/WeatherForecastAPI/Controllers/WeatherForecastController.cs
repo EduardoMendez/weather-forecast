@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using WeatherForecast;
 using Microsoft.Extensions.DependencyInjection;
 using WeatherForecastAPI.Models;
+using WeatherForecastAPI.DAO;
 
 namespace WeatherForecastAPI.Controllers
 {
@@ -16,18 +17,18 @@ namespace WeatherForecastAPI.Controllers
     {
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private Galaxy _galaxy;
-        private DAO.DayWeatherDAO _repository;
+        private DayWeatherDAO _repository;
+
+        private Galaxy _galaxy = Galaxy.GetVulcanosFerengisBetasoidesGalaxy();
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger, DAO.DayWeatherDAO repository)
         {
             _logger = logger;
             _repository = repository;
-            InitGalaxy();
         }
 
-        [HttpGet]
-        [HttpGet("periodYearsForecast")]
+        // GET: /weatherforecast/weatherperiods?years=[number]
+        [HttpGet("weatherperiods")]
         public dynamic GetYearsForecast(int years = 1)
         {
             var periods = new WeatherForecaster(_galaxy.Planets, _galaxy.Sun).
@@ -57,33 +58,17 @@ namespace WeatherForecastAPI.Controllers
             };
         }
 
-        [HttpGet]
-        [HttpGet("clima")]
-        public dynamic GetWeatherForDay(long day)
+        // GET: /weatherforecast/weather?day=[number]
+        [HttpGet("weather")]
+        public dynamic GetWeatherForDay(long day = 0)
         {
-            var dayWeather = _repository.GetDayWeather(day);
+            var dayWeather = _repository.GetDayWeatherByDay(day);
 
             return new
             {
                 dia = dayWeather.Day,
                 clima = dayWeather.Weather
             };
-        }
-
-        private void InitGalaxy()
-        {
-            _galaxy = new Galaxy();
-
-            var ferengi = new Planet("ferengi", 1, Direction.CLOCKWISE, 500);
-            var vulcano = new Planet("vulcano", 5, Direction.COUNTERCLOCKWISE, 1000);
-            var betasoide = new Planet("betasoide", 3, Direction.CLOCKWISE, 2000);
-
-            _galaxy.Planets = new List<Planet>()
-            {
-                ferengi, vulcano, betasoide
-            };
-
-            _galaxy.Sun = new Point(0, 0);
         }
     }
 }
