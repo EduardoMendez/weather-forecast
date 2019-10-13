@@ -1,0 +1,54 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace WeatherForecast
+{
+    public class MeteorologicalDay
+    {
+        public int Day { get; set; }
+        public WeatherType Weather { get; }
+        public Point Sun;
+        public IEnumerable<Point> PlanetsPositions { get; set; }
+
+        public MeteorologicalDay() { }
+
+        public MeteorologicalDay(int day, WeatherType weatherType, IEnumerable<Point> planets)
+        {
+            Day = day;
+            Weather = weatherType;
+            PlanetsPositions = planets;
+        }
+
+        public bool HasTheSameWeather(MeteorologicalDay day)
+        {
+            return this.Weather.GetType() == day.Weather.GetType();
+        }
+
+        public double CalculatePrecipitations()
+        {
+            return this.Weather.CalculatePrecipitations(PlanetsPositions);
+        }
+
+
+        public bool IsRain()
+        {
+            return Weather.IsRain();
+        }
+
+        public bool IsDrought()
+        {
+            return Weather.IsDrought();
+        }
+
+        public bool IsOptimal()
+        {
+            return Weather.IsOptimal();
+        }
+
+        public bool IsUnknown()
+        {
+            return Weather.IsUnknown();
+        }
+    }
+}

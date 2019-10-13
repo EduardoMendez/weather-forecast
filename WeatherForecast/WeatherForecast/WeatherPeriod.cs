@@ -11,20 +11,23 @@ namespace WeatherForecast
     {
         public int StartDay { get; set; }
         public int EndDay { get; set; }
-        public DayWeather PeakDay { get; set; }
-        public WeatherType WeatherType { get; set; }
+        public MeteorologicalDay PeakDay { get; set; }
+        public WeatherType Weather { get; set; }
 
-        public WeatherPeriod(WeatherType weatherType, IList<DayWeather> days)
+        public WeatherPeriod(WeatherType weatherType, IList<MeteorologicalDay> days)
         {
-            WeatherType = weatherType;
+            Weather = weatherType;
 
             StartDay = days.OrderBy(d => d.Day).First().Day;
             EndDay = days.OrderByDescending(d => d.Day).First().Day;
 
-            bool mustCalculatePeakDay = weatherType == WeatherType.RAIN;
-
-            if (mustCalculatePeakDay)
+            if (MustCalculatePeakDay())
                 PeakDay = this.GetPeakDay(days);
+        }
+
+        private bool MustCalculatePeakDay()
+        {
+            return Weather.IsRain();
         }
 
         public bool HasPeakDay()
@@ -32,9 +35,9 @@ namespace WeatherForecast
             return PeakDay != null;
         }
 
-        public DayWeather GetPeakDay(IList<DayWeather> days)
+        public MeteorologicalDay GetPeakDay(IList<MeteorologicalDay> days)
         {
-            return days.OrderBy(x => x.PrecipitacionLevel).First();
+            return days.OrderBy(x => x.CalculatePrecipitations()).First();
         }
     }
 }

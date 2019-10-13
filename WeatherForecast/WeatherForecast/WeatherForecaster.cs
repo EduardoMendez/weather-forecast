@@ -16,21 +16,21 @@ namespace WeatherForecast
             Sun = sun;
         }
 
-        public DayWeather WeatherForDay(int day)
+        public MeteorologicalDay WeatherForDay(int day)
         {
             var planetsPositions = Planets.Select(p => p.GetPositionForDay(day));
 
             if (PlanetsAndSunAligned(planetsPositions, Sun))
-                return new DroughtDay(day);
+                return new MeteorologicalDay(day, new Drought(), planetsPositions);
 
             // Planets aligned but not aligned with the sun.
             if (PlanetsAligned(planetsPositions))
-                return new OptimalDay(day);
+                return new MeteorologicalDay(day, new Optimal(), planetsPositions);
 
             if (new Triangle(planetsPositions).Contains(Sun))
-                return new RainyDay(day, planetsPositions);
+                return new MeteorologicalDay(day, new Rain(), planetsPositions);
 
-            return new UnknownDay(day);
+            return new MeteorologicalDay(day, new UnknownWeather(), planetsPositions);
         }
 
         public bool PlanetsAndSunAligned(IEnumerable<Point> planetsPositions, Point sun)
