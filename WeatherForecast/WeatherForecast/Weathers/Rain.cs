@@ -4,7 +4,7 @@ using System.Text;
 
 namespace WeatherForecast.Weathers
 {
-    class Rain : WeatherType
+    public class Rain : WeatherType
     {
         public override string Description { get => "Lluvia"; }
 
