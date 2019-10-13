@@ -11,6 +11,8 @@ namespace WeatherForecast
         public IEnumerable<Planet> Planets { get; set; }
         public Point Sun { get; set; }
 
+        private int daysPerYear = 360;
+
         public WeatherForecaster(IEnumerable<Planet> planets, Point sun)
         {
             Planets = planets;
@@ -34,6 +36,18 @@ namespace WeatherForecast
             return new MeteorologicalDay(day, new UnknownWeather(), planetsPositions);
         }
 
+        public IEnumerable<MeteorologicalDay> GetDayWeatherForecastForYears(int years)
+        {
+            var days = new List<MeteorologicalDay>();
+
+            for (int i = 0; i < (daysPerYear * years); i++)
+            {
+                days.Add(WeatherForDay(i));
+            }
+
+            return days;
+        }
+
         public IEnumerable<WeatherPeriod> GetWeatherPeriodsForecastForYears(int years)
         {
             var weatherPeriods = new List<WeatherPeriod>();
@@ -43,7 +57,7 @@ namespace WeatherForecast
             var currentWeather = day.Weather;
             periodDays.Add(day);
 
-            for (int i = 1; i < (360 * years); i++)
+            for (int i = 1; i < (daysPerYear * years); i++)
             {
                 day = this.WeatherForDay(i);
 

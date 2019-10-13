@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using WeatherForecast;
+using Microsoft.Extensions.DependencyInjection;
+using WeatherForecastAPI.Models;
 
 namespace WeatherForecastAPI.Controllers
 {
@@ -15,14 +17,17 @@ namespace WeatherForecastAPI.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
         private Galaxy _galaxy;
+        private DAO.DayWeatherDAO _repository;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public WeatherForecastController(ILogger<WeatherForecastController> logger, DAO.DayWeatherDAO repository)
         {
             _logger = logger;
+            _repository = repository;
             InitGalaxy();
         }
 
         [HttpGet]
+        [HttpGet("periodYearsForecast")]
         public dynamic GetYearsForecast(int years = 1)
         {
             var periods = new WeatherForecaster(_galaxy.Planets, _galaxy.Sun).
@@ -49,6 +54,19 @@ namespace WeatherForecastAPI.Controllers
                 periodosDeCondicionesDesconocidas = unknownPeriods,
                 diasPicoMaximoDeLluvia = maxPeakDays,
                 valorPicoMaximoDeLluvia = maxPeakLevel
+            };
+        }
+
+        [HttpGet]
+        [HttpGet("clima")]
+        public dynamic GetWeatherForDay(long day)
+        {
+            var dayWeather = _repository.GetDayWeather(day);
+
+            return new
+            {
+                dia = dayWeather.Day,
+                clima = dayWeather.Weather
             };
         }
 
