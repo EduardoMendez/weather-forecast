@@ -8,19 +8,10 @@ namespace WeatherForecast
     {
         public override WeatherType Weather { get => WeatherType.DROUGHT; }
         public override string Description { get => "Sequía"; }
-       
+        public override double PrecipitacionLevel { get => 0; }
+
         public DroughtDay() { }
 
         public DroughtDay(int day) : base(day) { }
-
-        public override bool HasPrecipitations()
-        {
-            return false;
-        }
-
-        public override double PrecipitacionLevel()
-        {
-            return 0;
-        }
     }
 }

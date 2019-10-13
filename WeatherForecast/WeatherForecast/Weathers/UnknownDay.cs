@@ -8,18 +8,10 @@ namespace WeatherForecast
     {
         public override WeatherType Weather { get => WeatherType.UNKNOWN; }
         public override string Description { get => "Desconocido"; }
+        public override double PrecipitacionLevel { get => 0; }
 
         public UnknownDay() { }
         public UnknownDay(int day) : base(day) { }
 
-        public override bool HasPrecipitations()
-        {
-            return false;
-        }
-
-        public override double PrecipitacionLevel()
-        {
-            return 0;
-        }
     }
 }

@@ -17,8 +17,7 @@ namespace WeatherForecast
         public int Day { get; set; }
         public virtual WeatherType Weather { get; }
         public virtual string Description { get; }
-        public abstract bool HasPrecipitations();
-        public abstract double PrecipitacionLevel();
+        public virtual double PrecipitacionLevel { get; }
 
         public DayWeather() { }
 
