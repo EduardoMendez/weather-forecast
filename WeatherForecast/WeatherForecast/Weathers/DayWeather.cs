@@ -20,6 +20,8 @@ namespace WeatherForecast
         public abstract bool HasPrecipitations();
         public abstract double PrecipitacionLevel();
 
+        public DayWeather() { }
+
         public DayWeather(int day)
         { 
             Day = day; 

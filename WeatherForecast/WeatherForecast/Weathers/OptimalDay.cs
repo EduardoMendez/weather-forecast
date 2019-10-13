@@ -9,6 +9,7 @@ namespace WeatherForecast
         public override WeatherType Weather { get => WeatherType.OPTIMAL; }
         public override string Description { get => "Optimo"; }
 
+        public OptimalDay() { }
         public OptimalDay(int day) : base(day) { }
 
         public override bool HasPrecipitations()

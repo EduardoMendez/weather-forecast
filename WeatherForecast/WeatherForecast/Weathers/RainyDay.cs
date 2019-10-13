@@ -10,6 +10,7 @@ namespace WeatherForecast
         public override string Description { get => "lluvia"; }
         private readonly double precipitationLevel;
 
+        public RainyDay() { }
         public RainyDay(int day, IEnumerable<Point> planets) : base(day) 
         { 
             precipitationLevel = new Triangle(planets).GetPerimeter();

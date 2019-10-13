@@ -8,6 +8,8 @@ namespace WeatherForecast
     {
         public override WeatherType Weather { get => WeatherType.DROUGHT; }
         public override string Description { get => "Sequía"; }
+       
+        public DroughtDay() { }
 
         public DroughtDay(int day) : base(day) { }
 
