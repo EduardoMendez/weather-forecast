@@ -47,15 +47,5 @@ namespace WeatherForecast
 
             return areCollinear;
         }
-
-        public static bool PointInTriangle(Point point, Point trianglePoint1, Point trianglePoint2, Point trianglePoint3)
-        {
-            double denominator = ((trianglePoint2.Y - trianglePoint3.Y) * (trianglePoint1.X - trianglePoint3.X) + (trianglePoint3.X - trianglePoint2.X) * (trianglePoint1.Y - trianglePoint3.Y));
-            double a = ((trianglePoint2.Y - trianglePoint3.Y) * (point.X - trianglePoint3.X) + (trianglePoint3.X - trianglePoint2.X) * (point.Y - trianglePoint3.Y)) / denominator;
-            double b = ((trianglePoint3.Y - trianglePoint1.Y) * (point.X - trianglePoint3.X) + (trianglePoint1.X - trianglePoint3.X) * (point.Y - trianglePoint3.Y)) / denominator;
-            double c = 1 - a - b;
-
-            return (0 <= a && a <= 1) && (0 <= b && b <= 1) && (0 <= c && c <= 1);
-        }
     }
 }

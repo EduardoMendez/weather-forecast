@@ -14,5 +14,12 @@ namespace WeatherForecast
             X = x;
             Y = y;
         }
+
+        public double DistanceTo(Point point)
+        {
+            return Math.Sqrt(
+                Math.Pow(point.X - this.X, 2) + Math.Pow(point.Y - this.Y, 2)
+            );
+        }
     }
 }
