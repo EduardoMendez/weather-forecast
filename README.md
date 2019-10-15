@@ -33,10 +33,13 @@ Ej: GET → http://....../clima?dia=566 → Respuesta: {“dia”:566, “clima�
 - Un "período" es un conjunto de días seguidos con el mismo clima. Un período podría estar formado por 1 solo día.
 
 ## Implementación
-Este ejercicio se encuentra implementado en C# utilizando .NET Core 3.0 y utiliza EF para el modelo de datos.
+Este ejercicio se encuentra implementado en C# utilizando .NET Core 3.0 y utiliza EF para el modelo de datos con una base SQL Server.
+Para generar la DB de manera local se debe contar con una instancia de SQL Server instalada y se deben correr las migrations, ejecutando en la Package Manager Console el comando 
+```Update-Database```
+*(verificar que esté seleccionado como proyecto default de la solución, el proyecto "WeatherForecastAPI").*
 
 ## Web API
-El deploy de esta aplicación fue realizado en Azure.
+El deploy de esta aplicación fue realizado en Azure (aplicación + DB).
 
 ### Uso
 Obtener los períodos de cada clima para las próximos 10 años:
