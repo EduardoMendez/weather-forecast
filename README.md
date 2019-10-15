@@ -46,4 +46,4 @@ Obtener la cantidad total de días por cada clima para las próximos 10 años:
 https://challenge-weather-forecast-api.azurewebsites.net/weatherforecast/weatherdays?years=10
 
 Obtener el clima para un cierto día:
-https://challenge-weather-forecast-api.azurewebsites.net/weatherforecast/weather?day=120
+https://challenge-weather-forecast-api.azurewebsites.net/weatherforecast/weather?day=29
