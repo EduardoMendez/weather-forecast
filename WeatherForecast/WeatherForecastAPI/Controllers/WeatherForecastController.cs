@@ -29,32 +29,50 @@ namespace WeatherForecastAPI.Controllers
 
         // GET: /weatherforecast/weatherperiods?years=[number]
         [HttpGet("weatherperiods")]
-        public dynamic GetYearsForecast(int years = 1)
+        public dynamic GetWeatherPeriodsForecast(int years = 1)
         {
             var periods = new WeatherForecaster(_galaxy.Planets, _galaxy.Sun)
                 .GetWeatherPeriodsForecastForYears(years);
 
             var droughtPeriods = periods.Count(p => p.Weather.IsDrought());
-            var rainnyPeriods = periods.Count(p => p.Weather.IsRain());
+            var rainyPeriods = periods.Count(p => p.Weather.IsRain());
             var optimalPeriods = periods.Count(p => p.Weather.IsOptimal());
             var unknownPeriods = periods.Count(p => p.Weather.IsUnknown());
 
-            var peakDays = periods
-                .Where(p => p.HasPeakDay())
-                .Select(p => p.PeakDay);
-
-            var maxPeakLevel = peakDays.Max(d => d.CalculatePrecipitations());
-            var maxPeakDays = peakDays
-                .Where(pd => pd.CalculatePrecipitations() == maxPeakLevel)
-                .Select(d => d.Day);
+            var peakInfo = GetPeakInfo(periods);
 
             return new { 
                 periodosDeSequia = droughtPeriods, 
-                periodosDeLluvia = rainnyPeriods,
+                periodosDeLluvia = rainyPeriods,
                 periodosDeCondicionesOptimas = optimalPeriods,
                 periodosDeCondicionesDesconocidas = unknownPeriods,
-                diasPicoMaximoDeLluvia = maxPeakDays,
-                valorPicoMaximoDeLluvia = maxPeakLevel
+                diasPicoMaximoDeLluvia = peakInfo.PeakDays,
+                valorPicoMaximoDeLluvia = peakInfo.PeakLevel
+            };
+        }
+
+        // GET: /weatherforecast/weatherdays?years=[number]
+        [HttpGet("weatherdays")]
+        public dynamic GetWeatherDaysForecast(int years = 1)
+        {
+            var periods = new WeatherForecaster(_galaxy.Planets, _galaxy.Sun)
+                .GetWeatherPeriodsForecastForYears(years);
+
+            int droughtDays = periods.Where(p => p.Weather.IsDrought()).Sum(p => p.GetDuration());
+            int rainyDays = periods.Where(p => p.Weather.IsRain()).Sum(p => p.GetDuration());
+            int optimalDays = periods.Where(p => p.Weather.IsOptimal()).Sum(p => p.GetDuration());
+            int unknownDays = periods.Where(p => p.Weather.IsUnknown()).Sum(p => p.GetDuration());
+
+            var peakInfo = GetPeakInfo(periods);
+
+            return new
+            {
+                diasDeSequia = droughtDays,
+                diasDeLluvia = rainyDays,
+                diasDeCondicionesOptimas = optimalDays,
+                diasDeCondicionesDesconocidas = unknownDays,
+                diasPicoMaximoDeLluvia = peakInfo.PeakDays,
+                valorPicoMaximoDeLluvia = peakInfo.PeakLevel
             };
         }
 
@@ -72,6 +90,22 @@ namespace WeatherForecastAPI.Controllers
                 dia = dayWeather.Day,
                 clima = dayWeather.Weather
             };
+        }
+
+
+        private PeakInfo GetPeakInfo(IEnumerable<WeatherPeriod> periods)
+        {
+            var peakDays = periods
+                .Where(p => p.HasPeakDay())
+                .Select(p => p.PeakDay);
+
+            var maxPeakLevel = peakDays.Max(d => d.CalculatePrecipitations());
+
+            var maxPeakDays = peakDays
+                    .Where(pd => pd.CalculatePrecipitations() == maxPeakLevel)
+                    .Select(d => d.Day);
+
+            return new PeakInfo(maxPeakLevel, maxPeakDays);
         }
     }
 }
