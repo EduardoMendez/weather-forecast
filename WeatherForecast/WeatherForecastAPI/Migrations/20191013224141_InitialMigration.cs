@@ -1,7 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 using WeatherForecast;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace WeatherForecastAPI.Migrations
 {
@@ -10,7 +8,7 @@ namespace WeatherForecastAPI.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Days",
+                name: "DayWeathers",
                 columns: table => new
                 {
                     Id = table.Column<long>(nullable: false)
@@ -20,7 +18,7 @@ namespace WeatherForecastAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Days", x => x.Id);
+                    table.PrimaryKey("PK_DayWeathers", x => x.Id);
                 });
 
             InitializeData(migrationBuilder);
@@ -29,9 +27,8 @@ namespace WeatherForecastAPI.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Days");
+                name: "DayWeathers");
         }
-
 
         private void InitializeData(MigrationBuilder migrationBuilder)
         {
@@ -39,12 +36,12 @@ namespace WeatherForecastAPI.Migrations
 
             var days = new WeatherForecaster(galaxy.Planets, galaxy.Sun).GetDayWeatherForecastForYears(10);
 
-            foreach(var d in days)
+            foreach (var d in days)
             {
                 string[] columns = { "Day", "Weather" };
                 object[] values = { d.Day, d.Weather.Description };
 
-                migrationBuilder.InsertData("Days", columns, values);
+                migrationBuilder.InsertData("DayWeathers", columns, values);
             }
         }
     }

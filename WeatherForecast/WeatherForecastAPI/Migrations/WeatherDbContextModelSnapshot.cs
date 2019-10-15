@@ -33,7 +33,7 @@ namespace WeatherForecastAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Days");
+                    b.ToTable("DayWeathers");
                 });
 #pragma warning restore 612, 618
         }

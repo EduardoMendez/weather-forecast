@@ -9,7 +9,7 @@ using WeatherForecastAPI.DAO;
 namespace WeatherForecastAPI.Migrations
 {
     [DbContext(typeof(WeatherDbContext))]
-    [Migration("20191013212240_InitialMigration")]
+    [Migration("20191013224141_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -35,7 +35,7 @@ namespace WeatherForecastAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Days");
+                    b.ToTable("DayWeathers");
                 });
 #pragma warning restore 612, 618
         }
