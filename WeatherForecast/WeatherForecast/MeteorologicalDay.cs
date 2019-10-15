@@ -9,7 +9,6 @@ namespace WeatherForecast
     {
         public int Day { get; set; }
         public WeatherType Weather { get; }
-        public Point Sun { get; }
         public IEnumerable<Point> PlanetsPositions { get; set; }
 
         public MeteorologicalDay() { }

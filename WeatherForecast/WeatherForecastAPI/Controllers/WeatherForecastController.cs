@@ -31,8 +31,8 @@ namespace WeatherForecastAPI.Controllers
         [HttpGet("weatherperiods")]
         public dynamic GetYearsForecast(int years = 1)
         {
-            var periods = new WeatherForecaster(_galaxy.Planets, _galaxy.Sun).
-                GetWeatherPeriodsForecastForYears(years);
+            var periods = new WeatherForecaster(_galaxy.Planets, _galaxy.Sun)
+                .GetWeatherPeriodsForecastForYears(years);
 
             var droughtPeriods = periods.Count(p => p.Weather.IsDrought());
             var rainnyPeriods = periods.Count(p => p.Weather.IsRain());
@@ -63,6 +63,9 @@ namespace WeatherForecastAPI.Controllers
         public dynamic GetWeatherForDay(long day = 0)
         {
             var dayWeather = _repository.GetDayWeatherByDay(day);
+
+            if (dayWeather == null)
+                return NotFound();
 
             return new
             {

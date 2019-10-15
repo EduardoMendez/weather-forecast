@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WeatherForecast.Exceptions;
 
 namespace WeatherForecast
 {
@@ -21,7 +22,7 @@ namespace WeatherForecast
         public Triangle(IEnumerable<Point> points)
         {
             if (points.Count() != 3)
-                throw new Exception("Invalid number of points.");
+                throw new InvalidPointsArgumentException("Invalid number of points. A triangle must have 3 points.");
 
             PointA = points.ElementAt(0);
             PointB = points.ElementAt(1);

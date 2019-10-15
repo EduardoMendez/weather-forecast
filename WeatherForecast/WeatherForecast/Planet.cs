@@ -42,7 +42,7 @@ namespace WeatherForecast
             var x = OrbitRadiusInKm * Math.Cos(angleInRadians);
             var y = OrbitRadiusInKm * Math.Sin(angleInRadians);
 
-            return new Point(x, y);
+            return new Point(x,y);
         }
     }
 }

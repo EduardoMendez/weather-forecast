@@ -15,6 +15,9 @@ namespace WeatherForecast
 
         public WeatherForecaster(IEnumerable<Planet> planets, Point sun)
         {
+            if (planets == null || !planets.Any() || sun == null)
+                throw new ArgumentException("Planets and sun can not be null or empty");
+
             Planets = planets;
             Sun = sun;
         }

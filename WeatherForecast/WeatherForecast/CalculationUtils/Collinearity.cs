@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using WeatherForecast.Exceptions;
 
 namespace WeatherForecast
 {
@@ -32,6 +33,9 @@ namespace WeatherForecast
 
         public static bool AreCollinear(IEnumerable<Point> points)
         {
+            if (points == null || !points.Any())
+                throw new InvalidPointsArgumentException("The list of points can not be null or empty");
+
             if (points.Count() < 3)
                 return true;
 
