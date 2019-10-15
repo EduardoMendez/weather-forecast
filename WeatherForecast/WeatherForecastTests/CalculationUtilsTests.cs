@@ -9,7 +9,7 @@ namespace WeatherForecastTests
     public class CalculationUtilsTests
     {
         [Test]
-        public void PointsOfBasicLineAreCollinear()
+        public void PointsOfBasicLineAreCollinearTest()
         {
             // Points of line y = x
             var pointA = new Point(1, 0);
@@ -20,7 +20,7 @@ namespace WeatherForecastTests
         }
 
         [Test]
-        public void PointsOfLineAreCollinear()
+        public void PointsOfLineAreCollinearTest()
         {
             // Points of line y = 5x + 3
             var pointA = new Point(0, 3);
@@ -31,7 +31,7 @@ namespace WeatherForecastTests
         }
 
         [Test]
-        public void PointsOfATriangleAreNotCollinear()
+        public void PointsOfATriangleAreNotCollinearTest()
         {
             var pointA = new Point(1, 0);
             var pointB = new Point(5, 0);
@@ -41,7 +41,7 @@ namespace WeatherForecastTests
         }
 
         [Test]
-        public void FivePointsOfLineAreCollinear()
+        public void FivePointsOfLineAreCollinearTest()
         {
             var points = new List<Point>
             {
@@ -57,7 +57,7 @@ namespace WeatherForecastTests
         }
 
         [Test]
-        public void FivePointsNonAlignedAreNotCollinear()
+        public void FivePointsNonAlignedAreNotCollinearTest()
         {
             var points = new List<Point>
             {

@@ -10,7 +10,7 @@ namespace WeatherForecastTests
     public class MeteorologicalDayTests
     {
         [Test]
-        public void TwoRainyDaysAreTheSameWeather()
+        public void TwoRainyDaysAreTheSameWeatherTest()
         {
             var day1 = new MeteorologicalDay(1, new Rain(), null);
             var day2 = new MeteorologicalDay(2, new Rain(), null);
@@ -19,7 +19,7 @@ namespace WeatherForecastTests
         }
 
         [Test]
-        public void ARainyDayAndADroughtDatAreNotTheSameWeather()
+        public void ARainyDayAndADroughtDayAreNotTheSameWeatherTest()
         {
             var rainyDay = new MeteorologicalDay(1, new Rain(), null);
             var droughtDay = new MeteorologicalDay(2, new Drought(), null);

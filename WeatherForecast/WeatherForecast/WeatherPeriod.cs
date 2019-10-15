@@ -40,5 +40,10 @@ namespace WeatherForecast
         {
             return days.OrderBy(x => x.CalculatePrecipitations()).First();
         }
+
+        public int GetDuration()
+        {
+            return EndDay - StartDay + 1; // We must count the initial day.
+        }
     }
 }

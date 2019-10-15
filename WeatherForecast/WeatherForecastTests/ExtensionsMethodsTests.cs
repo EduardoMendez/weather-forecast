@@ -9,7 +9,7 @@ namespace WeatherForecastTests
     public class ExtensionsMethodsTests
     {
         [Test]
-        public void FromDegreesToRadianTests()
+        public void FromDegreesToRadianTest()
         {
             double angleInDegrees = 90;
             var angleInRadians = angleInDegrees.ToRadians();
